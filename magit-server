@@ -1,0 +1,18 @@
+#!/bin/bash
+os=$(uname)
+args="--daemon --no-window-system --no-init-file --load $HOME/.magit/init.el"
+prefix=
+if [ "$#" -eq 1 ]; then
+    cd $1
+fi
+
+if [ "$#" -eq 2 ]; then
+    cd $1
+    prefix="env SHA=$2"
+fi
+
+if [ $os == "Darwin" ]; then
+  $prefix $(which emacs) $args
+else
+  $prefix emacs $args
+fi

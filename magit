@@ -1,6 +1,9 @@
 #!/bin/bash
 os=$(uname)
-args="--no-window-system --no-init-file --load $HOME/.magit/init.el"
+# args="--no-window-system --no-init-file --load $HOME/.magit/init.el"
+INIT= <<EOF
+EOF
+args='--no-window-system --eval (open-magit)'
 prefix=
 if [ "$#" -eq 1 ]; then
     cd $1
@@ -12,7 +15,7 @@ if [ "$#" -eq 2 ]; then
 fi
 
 if [ $os == "Darwin" ]; then
-  $prefix /Applications/Emacs.app/Contents/MacOS/Emacs $args
+  $prefix $(which emacsclient) $args
 else
-  $prefix emacs $args
+  $prefix emacsclient $args
 fi
