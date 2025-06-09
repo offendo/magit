@@ -14,7 +14,7 @@ if [ "$#" -eq 2 ]; then
     prefix="env SHA=$2"
 fi
 
-if [ $os == "Darwin" ]; then
+git rev-parse --is-inside-work-tree > /dev/null && if [ $os == "Darwin" ]; then
   $prefix $(which emacsclient) $args
 else
   $prefix emacsclient $args
